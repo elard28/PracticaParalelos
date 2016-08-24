@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define TAM 500
+#define TAM 50
 
 void llenar(int **p)
 {
