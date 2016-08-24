@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define TAM 50
+#define TAM 500
 
 void llenar(int **p)
 {
@@ -33,6 +33,18 @@ int** multiplica(int **a,int **b)
 	return c;
 }
 
+void bucle()
+{
+    for(int i=0;i<TAM;i++)
+        for(int j=0;j<TAM;j++)
+            for(int k=0;k<TAM;k++)
+                for(int l=0;l<TAM;l++)
+                    for(int m=0;m<TAM;m++)
+                        for(int n=0;n<TAM;n++)
+                            cout<<i+j+k+l+m+n<<" ";
+
+}
+
 int main(int argc, char const *argv[])
 {
 	srand(time(NULL));
@@ -58,6 +70,8 @@ int main(int argc, char const *argv[])
 			cout<<c[i][j]<<"\t";
 		cout<<endl<<endl;
 	}
+	
+	//bucle();
 
 	return 0;
 }
