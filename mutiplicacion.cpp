@@ -1,27 +1,29 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <algorithm>
+#include <math.h>
 
 using namespace std;
 
-#define TAM 500
+#define TAM 400
 
-void llenar(int **p)
+int a[TAM][TAM],b[TAM][TAM],c[TAM][TAM];
+
+void llenar()
 {
 	for (int i = 0; i < TAM; ++i)
 	{
 		for (int j = 0; j < TAM; ++j)
-			p[i][j]=rand()%100;
+		{
+			a[i][j]=3;
+			b[i][j]=2;
+		}
 	}
 }
 
-int** multiplica(int **a,int **b)
+void multiplica()
 {
-	int **c;
-	c=new int*[TAM];
-	for (int i = 0; i < TAM; ++i)
-		c[i]=new int[TAM];
-
 	for (int i = 0; i < TAM; ++i)
 	{
 		for (int j = 0; j < TAM; ++j)
@@ -30,48 +32,43 @@ int** multiplica(int **a,int **b)
 				c[i][j] += a[i][k] * b[k][j];
 		}
 	}
-	return c;
 }
 
-void bucle()
+void multiplica6()
 {
-    for(int i=0;i<TAM;i++)
-        for(int j=0;j<TAM;j++)
-            for(int k=0;k<TAM;k++)
-                for(int l=0;l<TAM;l++)
-                    for(int m=0;m<TAM;m++)
-                        for(int n=0;n<TAM;n++)
-                            cout<<i+j+k+l+m+n<<" ";
+	int t=TAM;
 
+	for (int i = 0; i < TAM; i=i+t)
+	{
+		for (int j = 0; j < TAM; j=j+t)
+		{
+			for (int k = 0; k < TAM; k=k+t)
+			{
+				//c[i][j]+=a[i][k]*b[k][j];
+				for (int l = i; l < min(i+t,TAM); ++l)
+				{
+					for (int m = j; m < min(j+t,TAM); ++m)
+					{
+						int sum=0;
+						for (int n = k; n < min(k+t,TAM); ++n)
+						{
+							sum+=a[l][n]*b[n][m];
+						}
+						c[l][m]=sum;
+					}
+				}
+			}
+		}
+	}
 }
+
 
 int main(int argc, char const *argv[])
 {
-	srand(time(NULL));
+	//llenar();
 
-	int **a;
-	a=new int*[TAM];
-	for (int i = 0; i < TAM; ++i)
-		a[i]=new int[TAM];
-
-	int **b;
-	b=new int*[TAM];
-	for (int i = 0; i < TAM; ++i)
-		b[i]=new int[TAM];
-
-	llenar(a);
-	llenar(b);
-
-	int **c=multiplica(a,b);
-
-	for (int i = 0; i < TAM; ++i)
-	{
-		for (int j = 0; j < TAM; ++j)
-			cout<<c[i][j]<<"\t";
-		cout<<endl<<endl;
-	}
+	//multiplica();
+	multiplica6();
 	
-	//bucle();
-
 	return 0;
 }
