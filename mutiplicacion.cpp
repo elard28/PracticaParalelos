@@ -36,7 +36,7 @@ void multiplica()
 
 void multiplica6()
 {
-	int t=TAM;
+	int t=sqrt(TAM);
 
 	for (int i = 0; i < TAM; i=i+t)
 	{
